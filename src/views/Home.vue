@@ -23,11 +23,16 @@ export default {
     inputRoom () {
       let self = this
       if (this.room) {
-        database.ref('room/' + this.room).set({
-          name: this.room
+        var starCountRef = database.ref('room/' + this.room)
+        starCountRef.on('value', function (snapshot) {
+          if (!snapshot.val()) {
+            database.ref('room/' + self.room).set({
+              name: self.room
+            })
+          }
+          self.room = ''
+          self.$router.push('signin')
         })
-        self.room = ''
-        self.$router.push('signin')
       }
     }
   }
