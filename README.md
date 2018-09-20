@@ -1,2 +1,2 @@
 # klikgemes
-Bikin gemes
+Bikin gemes klik
