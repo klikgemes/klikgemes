@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <script>
 import database from '../assets/config.js'
 export default {
@@ -23,15 +22,18 @@ export default {
   methods: {
     inputRoom () {
       let self = this
+      localStorage.setItem('room', self.room)
       if (this.room) {
         var starCountRef = database.ref('room/' + this.room)
-        starCountRef.on('value', function (snapshot) {
+        starCountRef.once('value', function (snapshot) {
           if (!snapshot.val()) {
             database.ref('room/' + self.room).set({
               name: self.room
             })
+            .then(response => {
+              self.room = ''
+            })
           }
-          self.room = ''
           self.$router.push('signin')
         })
       }
