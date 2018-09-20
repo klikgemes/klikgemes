@@ -10,6 +10,7 @@
   </div>
 </template>
 
+
 <script>
 import database from '../assets/config.js'
 export default {
