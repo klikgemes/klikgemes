@@ -10,11 +10,17 @@
   </div>
 </template>
 
+<<<<<<< HEAD
+=======
+<script>
+// @ is an alias to /src
+>>>>>>> 86d8120d83f1c612b408f589d048b69a7d68ebd3
 
 <script>
 import database from '../assets/config.js'
 export default {
   name: 'home',
+<<<<<<< HEAD
   data: function () {
     return {
       room: ''
@@ -37,6 +43,9 @@ export default {
       }
     }
   }
+=======
+  components: {}
+>>>>>>> 86d8120d83f1c612b408f589d048b69a7d68ebd3
 }
 </script>
 

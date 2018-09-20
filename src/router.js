@@ -15,11 +15,14 @@ export default new Router({
       component: Home
     },
     {
+<<<<<<< HEAD
       path: '/signin',
       name: 'signin',
       component: () => import('./views/Signin.vue')
     },
     {
+=======
+>>>>>>> 86d8120d83f1c612b408f589d048b69a7d68ebd3
       path: '/gameplay',
       name: 'gameplay',
       component: Gameplay
