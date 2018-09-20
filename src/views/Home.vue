@@ -1,18 +1,57 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>SELAMAT DATANG DI KLIK GEMES</h1>
+    <div class="col-md-4">
+      <h2>Silahkan input nama room</h2>
+      <input class="form-control form-control-lg" type="text" placeholder="Room" v-model="room">
+      <button type="button" class="btn btn-outline-success" v-on:click="inputRoom">Success</button>
+
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import database from '../assets/config.js'
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  data: function () {
+    return {
+      room: ''
+    }
+  },
+  methods: {
+    inputRoom () {
+      let self = this
+      if (this.room) {
+        var starCountRef = database.ref('room/' + this.room)
+        starCountRef.on('value', function (snapshot) {
+          if (!snapshot.val()) {
+            database.ref('room/' + self.room).set({
+              name: self.room
+            })
+          }
+          self.room = ''
+          self.$router.push('signin')
+        })
+      }
+    }
   }
 }
 </script>
+
+<style scoped>
+button {
+  margin-top: 10px;
+}
+.col-md-4 {
+  margin: 3% 0 0 10%;
+}
+h1 {
+  margin-left: 9%;
+}
+.home {
+background-image: url('https://i.ytimg.com/vi/YYT1kQyRbxo/maxresdefault.jpg');
+height: 900px;
+background-size: cover;
+}
+</style>
