@@ -4,7 +4,6 @@
     <div class="container col-md-4">
       <input type="text" class="form-control" v-model="userName" placeholder="Player name"> <br>
       <button type="button" class="btn btn-info" v-on:click="submitUserName">Submit Username</button>
-
     </div>
   </div>
 </template>
@@ -21,14 +20,34 @@ export default {
   methods: {
     submitUserName () {
       let self = this
-      database.ref('room/' + localStorage.getItem('room') + '/users').push({
-        userName: self.userName
-      })
-      this.$router.push('/gameplay')
+      if(self.userName === '' ){
+        alert('Isi username dong kaka!!!')
+      } else {
+        database.ref('room/' + localStorage.getItem('room') + '/users').once('value')
+          .then(function (snapshot) {
+            let totalPlayer = 0
+            if (snapshot.val()) {
+              totalPlayer = Object.keys(snapshot.val()).length
+            }
+            if (totalPlayer > 3) {
+              alert('room penoh cenoy')
+            } else {
+              database.ref('room/' + localStorage.getItem('room') + '/users').push({
+                userName: self.userName,
+                avatar: `https://api.adorable.io/avatars/50/${self.userName}`,
+                count: 0
+              })
+              .then(response => {
+                localStorage.setItem('id', response.key)
+              })
+              self.userName = ''
+              self.$router.push('/gameplay')
+            }
+          })
+      }
     }
   }
 }
-localStorage.setItem('room', 'test')
 </script>
 
 <style scoped>
