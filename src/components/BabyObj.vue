@@ -1,5 +1,5 @@
 <template>
-  <div class="baby">
+  <div class="baby" :style="{width: checkBabyWidth + 'px', height: checkBabyHeight + 'px'}" :class="[spanBaby]">
     <div class="face">
       <div class="eyes"></div>
       <div class="mouth">
@@ -11,28 +11,95 @@
 </template>
 
 <script>
+import database from '../assets/config.js'
+import { functions } from 'firebase';
+
 export default {
   name: 'BabyObj',
-  props: ['id']
+  data () {
+    return {
+      width: 83,
+      height: 225,
+      users: [],
+      finish: false,
+      gameStart: false,
+      id: '',
+      spanBaby: 'baby-face'
+    }
+  },
+  methods: {
+    growBig () {
+      let self = this
+      var manaCount = database.ref('room/' + localStorage.getItem('room') + '/users/' + localStorage.getItem('id'))
+      manaCount.on('value', function (snapshot) {
+        self.id = localStorage.getItem('id')
+        self.users = []
+        let keys = []
+        let values = []
+        if (snapshot.val()) {
+          keys = Object.keys(snapshot.val())
+          values = Object.values(snapshot.val())
+          // console.log('masuk dulu', values[1])
+          self.width += Number(values[1])*0.1
+          self.height += Number(values[1])*0.2
+          // console.log(self.width)
+        }
+
+        // keys.forEach((key, index) => {
+        //   self.users.push({
+        //     id: key,
+        //     username: values[index].userName,
+        //     avatar: values[index].avatar
+        //   })
+        //   if (values[index].count >= 50) {
+        //     self.finish = true
+        //   }
+        // })
+      })
+    }
+  },
+  created () {
+    this.growBig()
+  },
+  computed: {
+    checkBabyWidth: {
+      get: function () {
+        return this.width
+      }
+    },
+    checkBabyHeight: {
+      get: function () {
+        return this.height
+      }
+    }
+  },
+  watch: {
+    checkBabyWidth: function (val) {
+      console.log('cek width', val)
+    },
+    checkBabyHeight: function (val) {
+      console.log('cek height', val)
+    }
+  }
 }
 </script>
 
 <style>
 .baby {
-  /* margin: -112px 0 0 -43px; */
-  width: 86px;
-  height: 225px;
   background: #e8dcd8;
-  border-radius: 43px;
   box-shadow: -15px -10px 0px #65a9c1;
   overflow: hidden;
   position: absolute;
   top: 80%;
-  left: 30%;
-/*   transform: rotate(-40deg);
+  left: 25%;
+  border-radius: calc(100px);
+}
+
+.baby-face {
+  /* transform: rotate(-40deg);
   -webkit-transform: rotate(-40deg); */
-/*   animation: moving 1.2s ease-in-out infinite;
-  -webkit-animation: moving 1.2s ease-in-out infinite; */
+  animation: moving 1.2s ease-in-out infinite;
+  -webkit-animation: moving 1.2s ease-in-out infinite;
 }
 
 .baby .face {

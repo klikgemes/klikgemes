@@ -13,7 +13,7 @@
         <div>
           <baby-obj :id="user.id"></baby-obj>
         </div>
-        <button :id="user.id" @click="clickMe(user.id)" v-if="!finish && gameStart && id == user.id"></button>
+        <button :id="user.id" @click="clickMe(user.id)" v-if="!finish && gameStart && id == user.id">CLICK ME</button>
       </div>
 
     </div>
@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     clickMe: function (userId) {
+      console.log(this.users)
       var starCountRef = database.ref('room/' + localStorage.getItem('room') + '/users/' + userId)
       starCountRef.once('value', function (snapshot) {
         let counter = snapshot.val().count
@@ -95,8 +96,9 @@ button {
   width: 100px;
   height: 100px;
   transition: 0.3s;
-  left: 25%;
+  left: 28%;
   border-radius: 50%;
   background-color: #f2ca27;
+  cursor: pointer;
 }
 </style>
