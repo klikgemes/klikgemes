@@ -30,9 +30,9 @@ export default {
             database.ref('room/' + self.room).set({
               name: self.room
             })
-            .then(response => {
-              self.room = ''
-            })
+              .then(response => {
+                self.room = ''
+              })
           }
           self.$router.push('signin')
         })
