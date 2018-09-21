@@ -55,8 +55,8 @@ h1 {
 .home {
 background-image: url('https://i.ytimg.com/vi/YYT1kQyRbxo/maxresdefault.jpg');
 position: fixed; 
-top: 0; 
-left: 0; 
+top: 0;
+left: 0;
 background-size: cover;
 min-width: 100%;
 min-height: 100%;
