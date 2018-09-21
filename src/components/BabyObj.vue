@@ -1,5 +1,5 @@
 <template>
-  <div class="baby" :style="{width: checkBabyWidth + 'px', height: checkBabyHeight + 'px'}" :id="userid">
+  <div class="babyobj" :style="{width: checkBabyWidth + 'px', height: checkBabyHeight + 'px'}" :id="userid">
     <div class="face">
       <div class="eyes"></div>
       <div class="mouth">
@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style>
-.baby {
+.babyobj {
   background: #e8dcd8;
   box-shadow: -15px -10px 0px #65a9c1;
   overflow: hidden;
@@ -93,7 +93,7 @@ export default {
   -webkit-animation: moving 1.2s ease-in-out infinite;
 }
 
-.baby .face {
+.babyobj .face {
   margin: 10px 22px 0 8px;
   width: 60px;
   height: 66px;
@@ -104,7 +104,7 @@ export default {
   -webkit-animation: face 1.2s ease-in-out infinite;
 }
 
-.baby .face:before {
+.babyobj .face:before {
   content: "";
   display: block;
   width: 20px;
@@ -119,7 +119,7 @@ export default {
   -webkit-transform: rotate(-15deg);
 }
 
-.baby .face .eyes {
+.babyobj .face .eyes {
   margin-left: -30%;
   width: 60%;
   height: 10px;
@@ -128,7 +128,7 @@ export default {
   left: 50%;
 }
 
-.baby .face .eyes:before {
+.babyobj .face .eyes:before {
   content: "";
   width: 9px;
   height: 9px;
@@ -138,7 +138,7 @@ export default {
   animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite;
 }
 
-.baby .face .eyes:after {
+.babyobj .face .eyes:after {
   content: "";
   width: 9px;
   height: 9px;
@@ -148,7 +148,7 @@ export default {
   animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite;
 }
 
-.baby .face .mouth {
+.babyobj .face .mouth {
   margin-left: -16px;
   width: 32px;
   height: 18px;
@@ -161,7 +161,7 @@ export default {
   -webkit-animation: mouth .3s ease-in-out infinite;
 }
 
-.baby .face .mouth .tongue {
+.babyobj .face .mouth .tongue {
   margin-left: -3px;
   width: 6px;
   height: 10px;
@@ -176,7 +176,7 @@ export default {
   -webkit-animation: tongue .3s ease-in-out infinite;
 }
 
-.baby .blanket {
+.babyobj .blanket {
   width: 200%;
   height: 15px;
   background: #cdd3d7;
