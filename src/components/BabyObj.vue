@@ -11,10 +11,6 @@
 </template>
 
 <script>
-import database from '../assets/config.js'
-import { functions } from 'firebase'
-
-
 export default {
   name: 'BabyObj',
   data () {
@@ -28,29 +24,9 @@ export default {
   },
   props: ['userid', 'userclick'],
   methods: {
-    // growBig () {
-    //   let self = this
-    //   var manaCount = database.ref('room/' + localStorage.getItem('room') + '/users/')
-    //   manaCount.on('value', function (snapshot) {
-    //     console.log('----ada perubahan')
-    //     self.id = localStorage.getItem('id')
-    //     if (self.id === self.userid) {
-    //       self.users = []
-    //       let keys = []
-    //       let values = []
-    //       if (snapshot.val()) {
-    //         keys = Object.keys(snapshot.val())
-    //         values = Object.values(snapshot.val())
-    //         self.width += Number(values[4]) * 0.1
-    //         self.height += Number(values[2]) * 0.2
-    //       }
-    //     }
-    //   })
-    // }
   },
   created () {
     console.log('===== created')
-    // this.growBig()
   },
   computed: {
     checkBabyWidth: {

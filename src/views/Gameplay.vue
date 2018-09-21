@@ -11,20 +11,14 @@
           <img class="teen" src="../assets/images/teen.gif" v-else-if="user.count <= 30">
           <img class="old" src="../assets/images/kakek.gif" v-else>
         </div>
-<<<<<<< HEAD
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/engahhh.mp3')" v-if="!finish && gameStart && id == user.id && user.count<= 15" style="cursor:pointer;"></button>
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/teen.mp3')" v-else-if="!finish && gameStart && id == user.id && user.count <= 30" style="cursor:pointer;"></button>
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/toolur_GprA0J.mp3')" v-else-if="!finish && gameStart && id == user.id" style="cursor:pointer;"></button>
       </div>
     </div>
 
-=======
-        <button :id="user.id" @click="clickMe(user.id)" v-if="!finish && gameStart && id == user.id"></button>
-      </div>
-    </div>
->>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
     <div id="absolutePosition" v-if="!gameStart">
-      <div class="overlay"></div>       
+      <div class="overlay"></div>
       <div class="baby-load">
         <div class="body">
           <div class="head">
@@ -43,15 +37,13 @@
         <p class="card-text">Jumlah Pemain Tidak Cukup, Cepat Ajak Teman-Teman Mu</p>
       </div>
     </div>
-<<<<<<< HEAD
-
     <div id="absolutePosition" class="card w-75" style="position: absolute;" v-if="finish">
       <div class="card-body">
         <div>
           <img src="../assets/images/winner.png" alt="" width="500px" height="300px">
            <audio autoplay loop>
                 <source src="../assets/music/acengpilek.mp3">
-          </audio> 
+          </audio>
           <h1>1. {{ firstName[0].userName }}</h1>
           <h4>2. {{ firstName[1].userName }}</h4>
           <h4>3. {{ firstName[2].userName }}</h4>
@@ -60,10 +52,6 @@
         <router-link to="/">KEMBALI KEBERANDA</router-link>
       </div>
     </div>
-
-    <!-- <audio  ref="audioElm" src="../assets/music/engahhh.mp3"></audio> -->
-=======
->>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
   </div>
 </template>
 
@@ -81,12 +69,8 @@ export default {
       users: [],
       finish: false,
       gameStart: false,
-<<<<<<< HEAD
       id: '',
       playerName: []
-=======
-      id: ''
->>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
     }
   },
   created: function () {
@@ -102,7 +86,7 @@ export default {
         values = Object.values(snapshot.val())
       }
 
-      if (keys.length == 4) {
+      if (keys.length === 4) {
         self.gameStart = true
       }
 
@@ -115,11 +99,11 @@ export default {
         })
         if (values[index].count >= 50) {
           self.finish = true
-          for(let i = 0; i < values.length; i++){
-            for(let j = 0; j < values.length-1; j++){
-              if(values[j].count < values[j+1].count){
-                let sort = values[j+1]
-                values[j+1] = values[j]
+          for (let i = 0; i < values.length; i++) {
+            for (let j = 0; j < values.length - 1; j++) {
+              if (values[j].count < values[j + 1].count) {
+                let sort = values[j + 1]
+                values[j + 1] = values[j]
                 values[j] = sort
               }
             }
@@ -130,13 +114,9 @@ export default {
     })
   },
   methods: {
-<<<<<<< HEAD
-    clickMe: function (userId,sound) {
-     var audio = new Audio(sound);
-      audio.play();
-=======
-    clickMe: function (userId) {
->>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
+    clickMe: function (userId, sound) {
+      var audio = new Audio(sound)
+      audio.play()
       var starCountRef = database.ref('room/' + localStorage.getItem('room') + '/users/' + userId)
       starCountRef.once('value', function (snapshot) {
         let counter = snapshot.val().count
@@ -231,7 +211,7 @@ button {
   left: -50px;
   z-index: 75;
   -webkit-transform-origin: 50% 100%;
-          transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
 }
 .baby-load .head:after {
   position: absolute;
