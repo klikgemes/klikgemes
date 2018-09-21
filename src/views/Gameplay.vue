@@ -11,7 +11,7 @@
           <img class="card-img-top" src="https://svgsilh.com/svg/1299754-009688.svg" alt="Card image cap">
         </div> -->
         <div>
-          <baby-obj :id="user.id"></baby-obj>
+          <baby-obj :userid="user.id" :userclick="userClick"></baby-obj>
         </div>
         <button :id="user.id" @click="clickMe(user.id)" v-if="!finish && gameStart && id == user.id">CLICK ME</button>
       </div>
@@ -40,7 +40,8 @@ export default {
       users: [],
       finish: false,
       gameStart: false,
-      id: ''
+      id: '',
+      userClick: 0
     }
   },
   created: function () {
@@ -75,11 +76,16 @@ export default {
   methods: {
     clickMe: function (userId) {
       console.log(this.users)
+      this.userClick += 1
       var starCountRef = database.ref('room/' + localStorage.getItem('room') + '/users/' + userId)
       starCountRef.once('value', function (snapshot) {
         let counter = snapshot.val().count
+        // let nuwidth = snapshot.val().width
+        // let nuheight = snapshot.val().height
         starCountRef.update({
-          count: counter + 1
+          count: counter + 1,
+          // width: nuwidth + 2,
+          // height: nuheight + 2
         })
       })
     }
@@ -96,7 +102,7 @@ button {
   width: 100px;
   height: 100px;
   transition: 0.3s;
-  left: 28%;
+  left: 33%;
   border-radius: 50%;
   background-color: #f2ca27;
   cursor: pointer;

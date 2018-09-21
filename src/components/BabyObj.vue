@@ -1,5 +1,5 @@
 <template>
-  <div class="baby" :style="{width: checkBabyWidth + 'px', height: checkBabyHeight + 'px'}" :class="[spanBaby]">
+  <div class="baby" :style="{width: checkBabyWidth + 'px', height: checkBabyHeight + 'px'}" :id="userid">
     <div class="face">
       <div class="eyes"></div>
       <div class="mouth">
@@ -12,7 +12,8 @@
 
 <script>
 import database from '../assets/config.js'
-import { functions } from 'firebase';
+import { functions } from 'firebase'
+
 
 export default {
   name: 'BabyObj',
@@ -22,44 +23,34 @@ export default {
       height: 225,
       users: [],
       finish: false,
-      gameStart: false,
-      id: '',
-      spanBaby: 'baby-face'
+      gameStart: false
     }
   },
+  props: ['userid', 'userclick'],
   methods: {
-    growBig () {
-      let self = this
-      var manaCount = database.ref('room/' + localStorage.getItem('room') + '/users/' + localStorage.getItem('id'))
-      manaCount.on('value', function (snapshot) {
-        self.id = localStorage.getItem('id')
-        self.users = []
-        let keys = []
-        let values = []
-        if (snapshot.val()) {
-          keys = Object.keys(snapshot.val())
-          values = Object.values(snapshot.val())
-          // console.log('masuk dulu', values[1])
-          self.width += Number(values[1])*0.1
-          self.height += Number(values[1])*0.2
-          // console.log(self.width)
-        }
-
-        // keys.forEach((key, index) => {
-        //   self.users.push({
-        //     id: key,
-        //     username: values[index].userName,
-        //     avatar: values[index].avatar
-        //   })
-        //   if (values[index].count >= 50) {
-        //     self.finish = true
-        //   }
-        // })
-      })
-    }
+    // growBig () {
+    //   let self = this
+    //   var manaCount = database.ref('room/' + localStorage.getItem('room') + '/users/')
+    //   manaCount.on('value', function (snapshot) {
+    //     console.log('----ada perubahan')
+    //     self.id = localStorage.getItem('id')
+    //     if (self.id === self.userid) {
+    //       self.users = []
+    //       let keys = []
+    //       let values = []
+    //       if (snapshot.val()) {
+    //         keys = Object.keys(snapshot.val())
+    //         values = Object.values(snapshot.val())
+    //         self.width += Number(values[4]) * 0.1
+    //         self.height += Number(values[2]) * 0.2
+    //       }
+    //     }
+    //   })
+    // }
   },
   created () {
-    this.growBig()
+    console.log('===== created')
+    // this.growBig()
   },
   computed: {
     checkBabyWidth: {
@@ -80,6 +71,9 @@ export default {
     checkBabyHeight: function (val) {
       console.log('cek height', val)
     }
+    // userclick: function(newVal, oldVal) {
+    //   this.growBig()
+    // }
   }
 }
 </script>
@@ -93,11 +87,8 @@ export default {
   top: 80%;
   left: 25%;
   border-radius: calc(100px);
-}
-
-.baby-face {
-  /* transform: rotate(-40deg);
-  -webkit-transform: rotate(-40deg); */
+  transform: rotate(-40deg);
+  -webkit-transform: rotate(-40deg);
   animation: moving 1.2s ease-in-out infinite;
   -webkit-animation: moving 1.2s ease-in-out infinite;
 }
@@ -109,8 +100,8 @@ export default {
   background: #f9c19f;
   border-radius: 50%;
   position: relative;
-/*   animation: face 1.2s ease-in-out infinite;
-  -webkit-animation: face 1.2s ease-in-out infinite; */
+  animation: face 1.2s ease-in-out infinite;
+  -webkit-animation: face 1.2s ease-in-out infinite;
 }
 
 .baby .face:before {
@@ -124,8 +115,8 @@ export default {
   position: absolute;
   top: 0;
   left: 40%;
-/*   transform: rotate(-15deg);
-  -webkit-transform: rotate(-15deg); */
+  transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
 }
 
 .baby .face .eyes {
@@ -144,7 +135,7 @@ export default {
   background: #1b414c;
   border-radius: 50%;
   float: left;
-/*   animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite; */
+  animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite;
 }
 
 .baby .face .eyes:after {
@@ -154,7 +145,7 @@ export default {
   background: #1b414c;
   border-radius: 50%;
   float: right;
-/*   animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite; */
+  animation: eyes .5s linear infinite; -webkit-animation: eyes .5s linear infinite;
 }
 
 .baby .face .mouth {
@@ -166,8 +157,8 @@ export default {
   position: absolute;
   bottom: 10px;
   left: 50%;
-/*   animation: mouth .3s ease-in-out infinite;
-  -webkit-animation: mouth .3s ease-in-out infinite; */
+  animation: mouth .3s ease-in-out infinite;
+  -webkit-animation: mouth .3s ease-in-out infinite;
 }
 
 .baby .face .mouth .tongue {
@@ -181,8 +172,8 @@ export default {
   bottom: 0;
   left: 50%;
   z-index: 1;
-/*   animation: tongue .3s ease-in-out infinite;
-  -webkit-animation: tongue .3s ease-in-out infinite; */
+  animation: tongue .3s ease-in-out infinite;
+  -webkit-animation: tongue .3s ease-in-out infinite;
 }
 
 .baby .blanket {
@@ -194,8 +185,8 @@ export default {
   position: absolute;
   top: 45%;
   left: -30px;
-/*   animation: blanket 1.2s ease-in-out infinite;
-  -webkit-animation: blanket 1.2s ease-in-out infinite; */
+  animation: blanket 1.2s ease-in-out infinite;
+  -webkit-animation: blanket 1.2s ease-in-out infinite;
 }
 
 @keyframes moving {
