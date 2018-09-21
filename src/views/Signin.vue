@@ -23,7 +23,7 @@ export default {
   methods: {
     submitUserName () {
       let self = this
-      if(self.userName === '' ){
+      if (self.userName === '') {
         alert('Isi username dong kaka!!!')
       } else {
         database.ref('room/' + localStorage.getItem('room') + '/users').once('value')
@@ -38,7 +38,9 @@ export default {
               database.ref('room/' + localStorage.getItem('room') + '/users').push({
                 userName: self.userName,
                 avatar: `https://api.adorable.io/avatars/50/${self.userName}`,
-                count: 0
+                count: 0,
+                width: 0,
+                height: 0
               })
               .then(response => {
                 localStorage.setItem('id', response.key)
