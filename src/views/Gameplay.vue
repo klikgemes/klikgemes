@@ -11,12 +11,18 @@
           <img class="teen" src="../assets/images/teen.gif" v-else-if="user.count <= 30">
           <img class="old" src="../assets/images/kakek.gif" v-else>
         </div>
+<<<<<<< HEAD
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/engahhh.mp3')" v-if="!finish && gameStart && id == user.id && user.count<= 15" style="cursor:pointer;"></button>
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/teen.mp3')" v-else-if="!finish && gameStart && id == user.id && user.count <= 30" style="cursor:pointer;"></button>
         <button :id="user.id" @click="clickMe(user.id, 'http://storage.googleapis.com/imageblog/toolur_GprA0J.mp3')" v-else-if="!finish && gameStart && id == user.id" style="cursor:pointer;"></button>
       </div>
     </div>
 
+=======
+        <button :id="user.id" @click="clickMe(user.id)" v-if="!finish && gameStart && id == user.id"></button>
+      </div>
+    </div>
+>>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
     <div id="absolutePosition" v-if="!gameStart">
       <div class="overlay"></div>       
       <div class="baby-load">
@@ -37,6 +43,7 @@
         <p class="card-text">Jumlah Pemain Tidak Cukup, Cepat Ajak Teman-Teman Mu</p>
       </div>
     </div>
+<<<<<<< HEAD
 
     <div id="absolutePosition" class="card w-75" style="position: absolute;" v-if="finish">
       <div class="card-body">
@@ -55,6 +62,8 @@
     </div>
 
     <!-- <audio  ref="audioElm" src="../assets/music/engahhh.mp3"></audio> -->
+=======
+>>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
   </div>
 </template>
 
@@ -72,8 +81,12 @@ export default {
       users: [],
       finish: false,
       gameStart: false,
+<<<<<<< HEAD
       id: '',
       playerName: []
+=======
+      id: ''
+>>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
     }
   },
   created: function () {
@@ -117,9 +130,13 @@ export default {
     })
   },
   methods: {
+<<<<<<< HEAD
     clickMe: function (userId,sound) {
      var audio = new Audio(sound);
       audio.play();
+=======
+    clickMe: function (userId) {
+>>>>>>> c1dcd87101e49fb8eeeeb4757259449307ecedc8
       var starCountRef = database.ref('room/' + localStorage.getItem('room') + '/users/' + userId)
       starCountRef.once('value', function (snapshot) {
         let counter = snapshot.val().count
